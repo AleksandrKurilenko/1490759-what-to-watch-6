@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Куриленко](https://up.htmlacademy.ru/react/6/user/1490759).
-* Наставник: `Неизвестно`.
+* Наставник: [Иван Кривонос](https://htmlacademy.ru/profile/id1311037).
 
 ---
 

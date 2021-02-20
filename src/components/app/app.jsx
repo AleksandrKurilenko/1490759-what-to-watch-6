@@ -10,13 +10,13 @@ import Player from '../player/player';
 import NotFoundPage from '../not-found-page/not-found-page';
 
 const App = (props) => {
-  const {moviesCount, title, genre, releaseYear} = props;
+  const {films, title, genre, releaseYear} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
           <Main
-            moviesCount={moviesCount}
+            films={films}
             title={title}
             genre={genre}
             releaseYear={releaseYear}
@@ -28,13 +28,15 @@ const App = (props) => {
         <Route path="/mylist" exact>
           <MyList />
         </Route>
-        <Route path="/films/:id" exact>
-          <Movie />
+        <Route path="/films/:id">
+          <Movie
+            films={films}
+          />
         </Route>
-        <Route path="/films/:id/review" exact>
+        <Route path="/films/:id/review">
           <AddReview />
         </Route>
-        <Route path="/player/:id" exact>
+        <Route path="/player/:id">
           <Player />
         </Route>
         <Route>
@@ -47,7 +49,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  moviesCount: PropTypes.number.isRequired,
+  films: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   releaseYear: PropTypes.number.isRequired

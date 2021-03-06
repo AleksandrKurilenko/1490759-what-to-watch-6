@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import RatingStar from '../rating-star/rating-star';
+import PropTypes from 'prop-types';
+import AddReviewForm from '../add-review-form/add-review-form';
 
-const RATING_STARS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const AddReview = () => {
-  const [userReview, setUserReview] = useState({rating: 10, text: ``});
+const AddReview = ({title, poster, backgroundImage, id}) => {
+
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={title} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header">
@@ -25,7 +25,7 @@ const AddReview = () => {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                  <Link to={`/films/${id}`} className="breadcrumbs__link">{title}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -39,32 +39,22 @@ const AddReview = () => {
             </div>
           </header>
           <div className="movie-card__poster movie-card__poster--small">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+            <img src={poster} alt={title} width={218} height={327} />
           </div>
         </div>
         <div className="add-review">
-          <form action="#" className="add-review__form">
-            <div className="rating">
-              <div className="rating__stars">
-                {RATING_STARS.map((element) => <RatingStar
-                  key={element}
-                  rating={element}
-                  userReview={userReview}
-                  setUserReview={setUserReview}
-                />)}
-              </div>
-            </div>
-            <div className="add-review__text">
-              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" defaultValue={``} />
-              <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">Post</button>
-              </div>
-            </div>
-          </form>
+          <AddReviewForm />
         </div>
       </section>
     </React.Fragment>
   );
+};
+
+AddReview.propTypes = {
+  title: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired
 };
 
 export default AddReview;

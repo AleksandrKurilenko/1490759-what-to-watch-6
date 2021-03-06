@@ -1,21 +1,77 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import MoviesList from '../movies-list/movies-list';
-import {MoviesAmmount} from '../../consts';
 import PropTypes from 'prop-types';
+import {Link, useHistory} from 'react-router-dom';
+import MoviesList from '../movies-list/movies-list';
+import {MoviesAmmount, Urls} from '../../consts';
+import {MOVIES_PROP} from '../../utils/validate';
 
-const Movie = ({films}) => {
+const FilmRatings = {
+  Bad: {
+    DESCRIPTION: `Bad`,
+    RATING: 0
+  },
+  Normal: {
+    DESCRIPTION: `Normal`,
+    RATING: 3
+  },
+  Good: {
+    DESCRIPTION: `Good`,
+    RATING: 5
+  },
+  VeryGood: {
+    DESCRIPTION: `Very Good`,
+    RATING: 8
+  },
+  Awesome: {
+    DESCRIPTION: `Awesome`,
+    RATING: 10
+  }
+};
+
+const getDescriptionRating = (rating) => {
+  if (rating < FilmRatings.Normal.RATING) {
+    return FilmRatings.Bad.DESCRIPTION;
+  } else if (rating >= FilmRatings.Normal.RATING && rating < FilmRatings.Good.RATING) {
+    return FilmRatings.Normal.DESCRIPTION;
+  } else if (rating >= FilmRatings.Good.RATING && rating < FilmRatings.VeryGood.RATING) {
+    return FilmRatings.Good.DESCRIPTION;
+  } else if (rating >= FilmRatings.VeryGood.RATING && rating < FilmRatings.Awesome.RATING) {
+    return FilmRatings.VeryGood.DESCRIPTION;
+  }
+
+  return FilmRatings.Awesome.RATING;
+};
+
+
+const Movie = ({film, films}) => {
+
+  const {
+    backgroundImage,
+    name,
+    genre,
+    released,
+    posterImage,
+    rating,
+    scoresCount,
+    description,
+    director,
+    starring,
+    id
+  } = film;
+
+  const history = useHistory();
+
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={name} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header movie-card__head">
             <div className="logo">
-              <Link to="/" className="logo__link">
+              <Link to={Urls.MAIN} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -29,25 +85,25 @@ const Movie = ({films}) => {
           </header>
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={() => history.push(`/player/${id}`)}>
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s" />
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button className="btn btn--list movie-card__button" type="button" onClick={() => history.push(Urls.MY_LIST)}>
                   <svg viewBox="0 0 19 20" width={19} height={20}>
                     <use xlinkHref="#add" />
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -55,7 +111,7 @@ const Movie = ({films}) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+              <img src={posterImage} alt={name} width={218} height={327} />
             </div>
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
@@ -72,20 +128,16 @@ const Movie = ({films}) => {
                 </ul>
               </nav>
               <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
+                <div className="movie-rating__score">{rating}</div>
                 <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">240 ratings</span>
+                  <span className="movie-rating__level">{getDescriptionRating(rating)}</span>
+                  <span className="movie-rating__count">{scoresCount} ratings</span>
                 </p>
               </div>
               <div className="movie-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                  Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.</p>
-                <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying the
-                sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously,
-                  Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-                <p className="movie-card__director"><strong>Director: Wes Andreson</strong></p>
-                <p className="movie-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and
+                <p>{description}</p>
+                <p className="movie-card__director"><strong>Director: {director}</strong></p>
+                <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)} and
                     other</strong></p>
               </div>
             </div>
@@ -102,7 +154,7 @@ const Movie = ({films}) => {
         </section>
         <footer className="page-footer">
           <div className="logo">
-            <Link to="/" className="logo__link logo__link--light">
+            <Link to={Urls.MAIN} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -118,7 +170,9 @@ const Movie = ({films}) => {
 };
 
 Movie.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP)).isRequired,
+  film: PropTypes.shape(MOVIES_PROP).isRequired,
 };
+
 
 export default Movie;

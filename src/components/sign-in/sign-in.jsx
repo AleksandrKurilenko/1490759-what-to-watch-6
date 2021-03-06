@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {Urls} from '../../consts';
 
 const SignIn = () => {
   return (
@@ -7,7 +8,7 @@ const SignIn = () => {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <Link to="/" className="logo__link">
+            <Link to={Urls.MAIN} className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -34,7 +35,7 @@ const SignIn = () => {
         </div>
         <footer className="page-footer">
           <div className="logo">
-            <Link to="/" className="logo__link logo__link--light">
+            <Link to={Urls.MAIN} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>

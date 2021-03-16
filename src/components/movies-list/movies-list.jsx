@@ -5,7 +5,7 @@ import {MOVIES_PROP} from '../../utils/validate';
 
 
 const MoviesList = ({films, maxFilms}) => {
-  const [setActiveIdFilm] = useState(0);
+  const [activeIdFilm, setActiveIdFilm] = useState(0); // eslint-disable-line
 
   return (
     <div className="catalog__movies-list">
@@ -14,6 +14,7 @@ const MoviesList = ({films, maxFilms}) => {
         id={film.id}
         title={film.name}
         poster={film.previeImage}
+        previewVideoLink = {film.previewVideoLink}
         setActiveIdFilm = {setActiveIdFilm}
       />)}
     </div>

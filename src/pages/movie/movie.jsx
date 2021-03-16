@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link, useHistory} from 'react-router-dom';
-import MoviesList from '../movies-list/movies-list';
+import MoviesList from '../../components/movies-list/movies-list';
 import {MoviesAmmount, Urls} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
 

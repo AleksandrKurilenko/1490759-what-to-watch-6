@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card';
 import {MOVIES_PROP} from '../../utils/validate';
 
 
 const MoviesList = ({films, maxFilms}) => {
-  const [activeIdFilm, setActiveIdFilm] = useState(0); // eslint-disable-line
 
   return (
     <div className="catalog__movies-list">
@@ -15,7 +14,6 @@ const MoviesList = ({films, maxFilms}) => {
         title={film.name}
         poster={film.previeImage}
         previewVideoLink = {film.previewVideoLink}
-        setActiveIdFilm = {setActiveIdFilm}
       />)}
     </div>
   );

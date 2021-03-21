@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AddReviewForm from '../add-review-form/add-review-form';
+import AddReviewForm from '../../components/add-review-form/add-review-form';
 
 
 const AddReview = ({title, poster, backgroundImage, id}) => {

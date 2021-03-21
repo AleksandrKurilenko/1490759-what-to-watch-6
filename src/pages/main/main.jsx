@@ -1,7 +1,7 @@
 import React from 'react';
-import MoviesList from '../movies-list/movies-list';
+import MoviesList from '../../components/movies-list/movies-list';
 import PropTypes from 'prop-types';
-import PromoMovie from '../promo-movie/promo-movie';
+import PromoMovie from '../../components/promo-movie/promo-movie';
 import {MoviesAmmount} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
 

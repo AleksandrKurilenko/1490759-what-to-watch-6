@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card';
 import {MOVIES_PROP} from '../../utils/validate';
 
 
 const MoviesList = ({films, maxFilms}) => {
-  const [setActiveIdFilm] = useState(0);
 
   return (
     <div className="catalog__movies-list">
@@ -14,7 +13,7 @@ const MoviesList = ({films, maxFilms}) => {
         id={film.id}
         title={film.name}
         poster={film.previeImage}
-        setActiveIdFilm = {setActiveIdFilm}
+        previewVideoLink = {film.previewVideoLink}
       />)}
     </div>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
-import Main from '../main/main';
+import Main from '../../pages/main/main.jsx';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import SignIn from '../sign-in/sign-in';
-import MyList from '../my-list/my-list';
-import Movie from '../movie/movie';
-import AddReview from '../add-review/add-review';
-import Player from '../player/player';
+import SignIn from '../../pages/sign-in/sign-in';
+import MyList from '../../pages/my-list/my-list';
+import Movie from '../../pages/movie/movie';
+import AddReview from '../../pages/add-review/add-review';
+import Player from '../../pages/player/player';
 import NotFoundPage from '../not-found-page/not-found-page';
 import {Urls} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
@@ -47,7 +47,7 @@ const App = (props) => {
             id={film.id}
           />;
         }} />
-        <Route exact path={Urls.PLAYER} render={({match}) => {
+        <Route path={Urls.PLAYER} render={({match}) => {
           const id = match.params.id;
           const film = films[id - 1];
           return <Player

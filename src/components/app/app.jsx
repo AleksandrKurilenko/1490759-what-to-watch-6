@@ -9,11 +9,11 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFoundPage from '../not-found-page/not-found-page';
 import {Urls} from '../../consts';
-import {MOVIES_PROP} from '../../utils/validate';
+import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
 
 
 const App = (props) => {
-  const {films, promoMovie} = props;
+  const {films, promoMovie, reviews} = props;
   return (
     <BrowserRouter>
       <Switch>
@@ -35,6 +35,7 @@ const App = (props) => {
           return <Movie
             film={film}
             films={films}
+            reviews={reviews[id]}
           />;
         }} />
         <Route exact path={Urls.ADD_REVIEW} render={({match}) => {
@@ -66,7 +67,8 @@ const App = (props) => {
 
 App.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
-  promoMovie: PropTypes.shape(MOVIES_PROP).isRequired
+  promoMovie: PropTypes.shape(MOVIES_PROP).isRequired,
+  reviews: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP))).isRequired
 };
 
 export default App;

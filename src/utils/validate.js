@@ -19,3 +19,14 @@ export const MOVIES_PROP = {
   videoLink: PropTypes.string.isRequired,
   previewVideoLink: PropTypes.string.isRequired,
 };
+
+export const REVIEW_PROP = {
+  id: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  rating: PropTypes.number.isRequired,
+  comment: PropTypes.string.isRequired,
+  date: PropTypes.object.isRequired
+};

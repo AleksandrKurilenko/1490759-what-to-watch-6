@@ -12,3 +12,29 @@ export const Urls = {
   ADD_REVIEW: `/films/:id/review`,
   PLAYER: `/player/:id`,
 };
+
+export const FiltersType = {
+  ALL: `All`,
+  COMEDIES: `Comedy`,
+  CRIME: `Crime`,
+  DOCUMENTARY: `Documentary`,
+  DRAMAS: `Drama`,
+  HORROR: `Horror`,
+  KIDS_FAMILY: `Kids & Family`,
+  ROMANCE: `Romance`,
+  SCI_FI: `Sci-Fi`,
+  THRILLERS: `Thriller`,
+};
+
+export const Genres = {
+  ALL: `All genres`,
+  COMEDIES: `Comedies`,
+  CRIME: `Crime`,
+  DOCUMENTARY: `Documentary`,
+  DRAMAS: `Dramas`,
+  HORROR: `Horror`,
+  KIDS_FAMILY: `Kids & Family`,
+  ROMANCE: `Romance`,
+  SCI_FI: `Sci-Fi`,
+  THRILLERS: `Thrillers`,
+};

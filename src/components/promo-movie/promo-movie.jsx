@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {Urls} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
+import {connect} from 'react-redux';
 
 const PromoMovie = ({promoMovie}) => {
   const history = useHistory();
@@ -62,4 +63,9 @@ PromoMovie.propTypes = {
   promoMovie: PropTypes.shape(MOVIES_PROP).isRequired,
 };
 
-export default PromoMovie;
+const mapStateToProps = ({promoMovie}) => ({
+  promoMovie,
+});
+
+export {PromoMovie};
+export default connect(mapStateToProps, null)(PromoMovie);

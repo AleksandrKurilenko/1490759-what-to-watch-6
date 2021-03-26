@@ -8,9 +8,21 @@ import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
 const MovieTabs = ({film, reviews}) => {
   const getActiveTab = () => {
     if (activeTab.details) {
-      return <MovieDetails film={film} />;
+      return <MovieDetails
+        duration={film.runTime}
+        genre={film.genre}
+        released={film.released}
+        director={film.director}
+        starring={film.starring}
+      />;
     } else if (activeTab.overview) {
-      return <MovieOverview film={film} />;
+      return <MovieOverview
+        rating={film.rating}
+        scoresCount={film.scoresCount}
+        description={film.description}
+        director={film.director}
+        starring={film.starring}
+      />;
     }
     return <MovieReview reviews={reviews} />;
   };

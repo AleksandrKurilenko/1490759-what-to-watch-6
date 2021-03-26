@@ -2,22 +2,28 @@ import React from 'react';
 import MoviesList from '../../components/movies-list/movies-list';
 import PropTypes from 'prop-types';
 import PromoMovie from '../../components/promo-movie/promo-movie';
-import {MoviesAmmount} from '../../consts';
+import {FiltersType, MoviesAmmount} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
+import GenresList from '../../components/genres-list/genres-list';
+import {connect} from 'react-redux';
 
-const Main = ({films, promoMovie}) => {
+
+const filterMovies = (movies, genre) => genre === FiltersType.ALL ? movies : movies.filter((movie) => movie.genre === genre);
+
+const Main = ({films, genre}) => {
 
   return (
     <React.Fragment>
-      <PromoMovie
-        promoMovie={promoMovie}
-      />
+      <PromoMovie />
 
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
+          <GenresList
+            genre={genre}
+          />
+          {/* <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
               <a href="#" className="catalog__genres-link">All genres</a>
             </li>
@@ -48,10 +54,10 @@ const Main = ({films, promoMovie}) => {
             <li className="catalog__genres-item">
               <a href="#" className="catalog__genres-link">Thrillers</a>
             </li>
-          </ul>
+           </ul> */}
 
           <MoviesList
-            films={films}
+            films={filterMovies(films, genre)}
             maxFilms={MoviesAmmount.MAIN_PAGE}
           />
 
@@ -78,9 +84,17 @@ const Main = ({films, promoMovie}) => {
   );
 };
 
+
 Main.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
-  promoMovie: PropTypes.shape(MOVIES_PROP).isRequired
+  promoMovie: PropTypes.shape(MOVIES_PROP).isRequired,
+  genre: PropTypes.string.isRequired
 };
 
-export default Main;
+const mapStateToProps = ({genre, films}) => ({
+  genre,
+  films
+});
+
+export {Main};
+export default connect(mapStateToProps, null)(Main);

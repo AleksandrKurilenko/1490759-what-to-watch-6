@@ -60,4 +60,4 @@ const mapStateToProps = ({films}) => ({
 });
 
 export {MyList};
-export default connect(mapStateToProps, null)(MyList);
+export default connect(mapStateToProps)(MyList);

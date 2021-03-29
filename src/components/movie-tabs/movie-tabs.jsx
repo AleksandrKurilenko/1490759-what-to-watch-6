@@ -8,9 +8,13 @@ import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
 const MovieTabs = ({film, reviews}) => {
   const getActiveTab = () => {
     if (activeTab.details) {
-      return <MovieDetails film={film} />;
+      return <MovieDetails
+        film ={film}
+      />;
     } else if (activeTab.overview) {
-      return <MovieOverview film={film} />;
+      return <MovieOverview
+        film={film}
+      />;
     }
     return <MovieReview reviews={reviews} />;
   };

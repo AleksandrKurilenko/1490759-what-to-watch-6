@@ -5,10 +5,9 @@ import MoviesList from '../../components/movies-list/movies-list';
 import {MoviesAmmount, Urls} from '../../consts';
 import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
+import {connect} from 'react-redux';
 
-const similarMovies = (films, genre, name) => {
-  return films.filter((film) => film.genre === genre && film.name !== name);
-};
+const getSimilarMovies = (films, genre, name) => films.filter((film) => film.genre === genre && film.name !== name);
 
 
 // const FilmRatings = {
@@ -127,7 +126,7 @@ const Movie = ({film, reviews, films}) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
-            films={similarMovies(films, genre, name)}
+            films={getSimilarMovies(films, genre, name)}
             maxFilms={MoviesAmmount.MOVIE_PAGE}
           />
         </section>
@@ -155,4 +154,9 @@ Movie.propTypes = {
 };
 
 
-export default Movie;
+const mapStateToProps = ({films}) => ({
+  films,
+});
+
+export {Movie};
+export default connect(mapStateToProps)(Movie);

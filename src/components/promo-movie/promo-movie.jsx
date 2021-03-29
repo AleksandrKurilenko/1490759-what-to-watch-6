@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {Urls} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 
-const PromoMovie = ({promoMovie}) => {
+const PromoMovie = ({promoMovie, onResetAmountShowFilms}) => {
   const history = useHistory();
   return (
     <section className="movie-card">
@@ -38,13 +40,19 @@ const PromoMovie = ({promoMovie}) => {
               <span className="movie-card__year">{promoMovie.released}</span>
             </p>
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button" onClick={() => history.push(`/player/${promoMovie.id}`)}>
+              <button className="btn btn--play movie-card__button" type="button" onClick={() => {
+                history.push(`/player/${promoMovie.id}`);
+                onResetAmountShowFilms();
+              }}>
                 <svg viewBox="0 0 19 19" width={19} height={19}>
                   <use xlinkHref="#play-s" />
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list movie-card__button" type="button" onClick={() => history.push(Urls.MY_LIST)}>
+              <button className="btn btn--list movie-card__button" type="button" onClick={() => {
+                history.push(Urls.MY_LIST);
+                onResetAmountShowFilms();
+              }}>
                 <svg viewBox="0 0 19 20" width={19} height={20}>
                   <use xlinkHref="#add" />
                 </svg>
@@ -60,6 +68,18 @@ const PromoMovie = ({promoMovie}) => {
 
 PromoMovie.propTypes = {
   promoMovie: PropTypes.shape(MOVIES_PROP).isRequired,
+  onResetAmountShowFilms: PropTypes.func.isRequired
 };
 
-export default PromoMovie;
+const mapStateToProps = ({promoMovie}) => ({
+  promoMovie,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onResetAmountShowFilms() {
+    dispatch(ActionCreator.resetAmountShowFilms());
+  },
+});
+
+export {PromoMovie};
+export default connect(mapStateToProps, mapDispatchToProps)(PromoMovie);

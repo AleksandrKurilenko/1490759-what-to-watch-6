@@ -10,18 +10,15 @@ import Player from '../../pages/player/player';
 import NotFoundPage from '../not-found-page/not-found-page';
 import {Urls} from '../../consts';
 import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
+import {connect} from 'react-redux';
 
 
-const App = (props) => {
-  const {films, promoMovie, reviews} = props;
+const App = ({films, reviews}) => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={Urls.MAIN} exact>
-          <Main
-            films={films}
-            promoMovie={promoMovie}
-          />
+          <Main />
         </Route>
         <Route path={Urls.SIGN_IN} exact>
           <SignIn />
@@ -34,7 +31,6 @@ const App = (props) => {
           const film = films[id - 1];
           return <Movie
             film={film}
-            films={films}
             reviews={reviews[id]}
           />;
         }} />
@@ -67,8 +63,13 @@ const App = (props) => {
 
 App.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
-  promoMovie: PropTypes.shape(MOVIES_PROP).isRequired,
   reviews: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP))).isRequired
 };
 
-export default App;
+const mapStateToProps = ({films, reviews}) => ({
+  films,
+  reviews
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {MOVIES_PROP} from '../../utils/validate';
 import {getDuration} from '../../utils/common';
 
-const MovieDetails = ({film}) => {
-  const {runTime, genre, released, director, starring} = film;
+const MovieDetails = ({duration, genre, released, director, starring}) => {
+
   return (
     <React.Fragment>
       <div className="movie-card__text movie-card__row">
@@ -23,7 +22,7 @@ const MovieDetails = ({film}) => {
         <div className="movie-card__text-col">
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Run Time</strong>
-            <span className="movie-card__details-value">{getDuration(runTime).hour}h {getDuration(runTime).minutes}m</span>
+            <span className="movie-card__details-value">{getDuration(duration).hour}h {getDuration(duration).minutes}m</span>
           </p>
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Genre</strong>
@@ -40,7 +39,11 @@ const MovieDetails = ({film}) => {
 };
 
 MovieDetails.propTypes = {
-  film: PropTypes.shape(MOVIES_PROP).isRequired,
+  duration: PropTypes.number.isRequired,
+  genre: PropTypes.string.isRequired,
+  released: PropTypes.number.isRequired,
+  director: PropTypes.string.isRequired,
+  starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default MovieDetails;

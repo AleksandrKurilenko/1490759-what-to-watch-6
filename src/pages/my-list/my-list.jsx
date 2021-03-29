@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import MoviesList from '../../components/movies-list/movies-list';
 import {MoviesAmmount, Urls} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
@@ -54,4 +55,9 @@ MyList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
 };
 
-export default MyList;
+const mapStateToProps = ({films}) => ({
+  films,
+});
+
+export {MyList};
+export default connect(mapStateToProps)(MyList);

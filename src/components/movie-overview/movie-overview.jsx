@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {MOVIES_PROP} from '../../utils/validate';
 
 const FilmRatings = {
   Bad: {
@@ -39,14 +38,7 @@ const getDescriptionRating = (rating) => {
   return FilmRatings.Awesome.RATING;
 };
 
-const MovieOverview = ({film}) => {
-  const {
-    rating,
-    scoresCount,
-    description,
-    director,
-    starring,
-  } = film;
+const MovieOverview = ({rating, scoresCount, description, director, starring}) => {
 
   return (
     <React.Fragment>
@@ -68,7 +60,11 @@ const MovieOverview = ({film}) => {
 };
 
 MovieOverview.propTypes = {
-  film: PropTypes.shape(MOVIES_PROP).isRequired,
+  rating: PropTypes.number.isRequired,
+  scoresCount: PropTypes.number.isRequired,
+  director: PropTypes.string.isRequired,
+  starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 export default MovieOverview;

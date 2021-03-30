@@ -38,7 +38,7 @@ export const GenreTabNames = {
   THRILLERS: `Thrillers`,
 };
 
-export const Genres = [
+export const GENRES = [
   `ALL`,
   `COMEDIES`,
   `CRIME`,

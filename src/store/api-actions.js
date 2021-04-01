@@ -17,16 +17,6 @@ const adaptToClient = (film) => {
       }
   );
 
-  delete adaptedFilm.poster_image;
-  delete adaptedFilm.preview_image;
-  delete adaptedFilm.background_image;
-  delete adaptedFilm.background_color;
-  delete adaptedFilm.scores_count;
-  delete adaptedFilm.run_time;
-  delete adaptedFilm.is_favorite;
-  delete adaptedFilm.video_link;
-  delete adaptedFilm.preview_video_link;
-
   return adaptedFilm;
 };
 

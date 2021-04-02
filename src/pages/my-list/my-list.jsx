@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import MoviesList from '../../components/movies-list/movies-list';
-import {MoviesAmmount, Urls} from '../../consts';
+import {MoviesAmmount, Url} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
 
 
@@ -14,7 +14,7 @@ const MyList = ({films}) => {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <Link to={Urls.MAIN} className="logo__link">
+            <Link to={Url.MAIN} className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -36,7 +36,7 @@ const MyList = ({films}) => {
         </section>
         <footer className="page-footer">
           <div className="logo">
-            <Link to={Urls.MAIN} className="logo__link logo__link--light">
+            <Link to={Url.MAIN} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>

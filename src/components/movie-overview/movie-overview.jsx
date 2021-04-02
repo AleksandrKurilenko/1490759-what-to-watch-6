@@ -35,7 +35,7 @@ const getDescriptionRating = (rating) => {
     return FilmRatings.VeryGood.DESCRIPTION;
   }
 
-  return FilmRatings.Awesome.RATING;
+  return FilmRatings.Awesome.DESCRIPTION;
 };
 
 const MovieOverview = ({rating, scoresCount, description, director, starring}) => {

@@ -1,4 +1,4 @@
-import {FiltersType} from "../consts";
+import {ALL_GENRES_NAME_TAB} from "../consts";
 
 export const getDuration = (duration) => {
   return {
@@ -8,4 +8,15 @@ export const getDuration = (duration) => {
   };
 };
 
-export const getFilteredMovies = (movies, genre) => genre === FiltersType.ALL ? movies : movies.filter((movie) => movie.genre === genre);
+export const getFilteredMovies = (movies, genre) => genre === ALL_GENRES_NAME_TAB ? movies : movies.filter((movie) => movie.genre === genre);
+
+export const getGenres = (films) => {
+  let genres = new Map();
+  genres.set(ALL_GENRES_NAME_TAB, ALL_GENRES_NAME_TAB);
+
+  films.forEach((film) => {
+    genres.set(film.genre, film.genre);
+  });
+
+  return genres;
+};

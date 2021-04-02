@@ -20,6 +20,26 @@ export const MOVIES_PROP = {
   previewVideoLink: PropTypes.string.isRequired,
 };
 
+export const MOVIES_NOT_REQUIRE_PROP = {
+  name: PropTypes.string,
+  posterImage: PropTypes.string,
+  previeImage: PropTypes.string,
+  backgroundImage: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  description: PropTypes.string,
+  rating: PropTypes.number,
+  scoresCount: PropTypes.number,
+  director: PropTypes.string,
+  starring: PropTypes.arrayOf(PropTypes.string.isRequired),
+  runTime: PropTypes.number,
+  genre: PropTypes.string,
+  released: PropTypes.number,
+  id: PropTypes.number,
+  isFavorite: PropTypes.bool,
+  videoLink: PropTypes.string,
+  previewVideoLink: PropTypes.string,
+};
+
 export const REVIEW_PROP = {
   id: PropTypes.number.isRequired,
   user: PropTypes.shape({

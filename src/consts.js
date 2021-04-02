@@ -3,52 +3,27 @@ export const MoviesAmmount = {
   MOVIE_PAGE: 4
 };
 
-export const Urls = {
+export const Url = {
   MAIN: `/`,
   SIGN_IN: `/login`,
   MY_LIST: `/mylist`,
   MOVIE: `/films/:id`,
   ADD_REVIEW: `/films/:id/review`,
   PLAYER: `/player/:id`,
+  LOG_OUT: `/logout`,
+  NOT_FOUND: `/404`
 };
 
-export const FiltersType = {
-  ALL: `All`,
-  COMEDIES: `Comedy`,
-  CRIME: `Crime`,
-  DOCUMENTARY: `Documentary`,
-  DRAMAS: `Drama`,
-  HORROR: `Horror`,
-  KIDS_FAMILY: `Kids & Family`,
-  ROMANCE: `Romance`,
-  SCI_FI: `Sci-Fi`,
-  THRILLERS: `Thriller`,
-};
-
-export const GenreTabNames = {
-  ALL: `All genres`,
-  COMEDIES: `Comedies`,
-  CRIME: `Crime`,
-  DOCUMENTARY: `Documentary`,
-  DRAMAS: `Dramas`,
-  HORROR: `Horror`,
-  KIDS_FAMILY: `Kids & Family`,
-  ROMANCE: `Romance`,
-  SCI_FI: `Sci-Fi`,
-  THRILLERS: `Thrillers`,
-};
-
-export const GENRES = [
-  `ALL`,
-  `COMEDIES`,
-  `CRIME`,
-  `DOCUMENTARY`,
-  `DRAMAS`,
-  `HORROR`,
-  `KIDS_FAMILY`,
-  `ROMANCE`,
-  `SCI_FI`,
-  `THRILLERS`
-];
+export const ALL_GENRES_NAME_TAB = `All genres`;
 
 export const FILMS_AMOUNT_PER_STEP = 8;
+
+export const AuthorizationStatuses = {
+  AUTH: `Auth`,
+  NO_AUTH: `NoAuth`
+};
+
+export const AuthorizationErrorMessage = {
+  DEFAULT: ``,
+  EMAIL: `Please enter a valid email address or password`
+};

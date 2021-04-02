@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import MoviesList from '../../components/movies-list/movies-list';
-import {MoviesAmmount, Urls} from '../../consts';
-import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
+import UserBlock from '../../components/user-block/user-block';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import {connect} from 'react-redux';
+import {AuthorizationStatuses, MoviesAmmount, Url} from '../../consts';
+import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
 
 const getSimilarMovies = (films, genre, name) => films.filter((film) => film.genre === genre && film.name !== name);
 
@@ -48,7 +49,7 @@ const getSimilarMovies = (films, genre, name) => films.filter((film) => film.gen
 // };
 
 
-const Movie = ({film, reviews, films}) => {
+const Movie = ({film, reviews, films, onPlayMovie, onAddFavoriteMovie, authorizationStatus}) => {
 
   const {
     backgroundImage,
@@ -59,7 +60,6 @@ const Movie = ({film, reviews, films}) => {
     id
   } = film;
 
-  const history = useHistory();
 
   return (
     <React.Fragment>
@@ -71,17 +71,13 @@ const Movie = ({film, reviews, films}) => {
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header movie-card__head">
             <div className="logo">
-              <Link to={Urls.MAIN} className="logo__link">
+              <Link to={Url.MAIN} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
               </Link>
             </div>
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-              </div>
-            </div>
+            <UserBlock />
           </header>
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -91,19 +87,22 @@ const Movie = ({film, reviews, films}) => {
                 <span className="movie-card__year">{released}</span>
               </p>
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={() => history.push(`/player/${id}`)}>
+                <button className="btn btn--play movie-card__button" type="button" onClick={() => onPlayMovie()}>
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s" />
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button" onClick={() => history.push(Urls.MY_LIST)}>
+                <button className="btn btn--list movie-card__button" type="button" onClick={() => onAddFavoriteMovie()}>
                   <svg viewBox="0 0 19 20" width={19} height={20}>
                     <use xlinkHref="#add" />
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatuses.AUTH
+                  ? <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
+                  : ``
+                }
               </div>
             </div>
           </div>
@@ -132,7 +131,7 @@ const Movie = ({film, reviews, films}) => {
         </section>
         <footer className="page-footer">
           <div className="logo">
-            <Link to={Urls.MAIN} className="logo__link logo__link--light">
+            <Link to={Url.MAIN} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -150,12 +149,16 @@ const Movie = ({film, reviews, films}) => {
 Movie.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP)).isRequired,
   film: PropTypes.shape(MOVIES_PROP).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP)).isRequired
+  reviews: PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP)).isRequired,
+  onPlayMovie: PropTypes.func.isRequired,
+  onAddFavoriteMovie: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
 
 
-const mapStateToProps = ({films}) => ({
+const mapStateToProps = ({films, authorizationStatus}) => ({
   films,
+  authorizationStatus
 });
 
 export {Movie};

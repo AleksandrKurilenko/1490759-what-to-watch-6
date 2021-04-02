@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
-import {Urls} from '../../consts';
+import {Url} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
+import UserBlock from '../user-block/user-block';
 
 const PromoMovie = ({promoMovie, onResetAmountShowFilms}) => {
   const history = useHistory();
@@ -22,11 +23,7 @@ const PromoMovie = ({promoMovie, onResetAmountShowFilms}) => {
             <span className="logo__letter logo__letter--3">W</span>
           </a>
         </div>
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-          </div>
-        </div>
+        <UserBlock />
       </header>
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -50,7 +47,7 @@ const PromoMovie = ({promoMovie, onResetAmountShowFilms}) => {
                 <span>Play</span>
               </button>
               <button className="btn btn--list movie-card__button" type="button" onClick={() => {
-                history.push(Urls.MY_LIST);
+                history.push(Url.MY_LIST);
                 onResetAmountShowFilms();
               }}>
                 <svg viewBox="0 0 19 20" width={19} height={20}>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
+import UserBlock from '../../components/user-block/user-block';
 
 
 const AddReview = ({title, poster, backgroundImage, id}) => {
@@ -32,18 +33,16 @@ const AddReview = ({title, poster, backgroundImage, id}) => {
                 </li>
               </ul>
             </nav>
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-              </div>
-            </div>
+            <UserBlock />
           </header>
           <div className="movie-card__poster movie-card__poster--small">
             <img src={poster} alt={title} width={218} height={327} />
           </div>
         </div>
         <div className="add-review">
-          <AddReviewForm />
+          <AddReviewForm
+            id={id}
+          />
         </div>
       </section>
     </React.Fragment>

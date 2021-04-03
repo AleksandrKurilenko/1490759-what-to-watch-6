@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import MoviesList from '../../components/movies-list/movies-list';
-import {MoviesAmmount, Url} from '../../consts';
+import {Url} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
+import UserBlock from '../../components/user-block/user-block';
+import {fetchFavoriteFilmsList} from "../../store/api-actions";
+import {getFavoriteFilms} from '../../store/films/selectors';
 
 
-const MyList = ({films}) => {
+const MyList = ({favoriteFilms, loadFavoriteFilms}) => {
+  useEffect(() => {
+    if (favoriteFilms.length === 0) {
+      loadFavoriteFilms();
+    }
+  }, [favoriteFilms]);
 
   return (
     <React.Fragment>
@@ -21,17 +29,12 @@ const MyList = ({films}) => {
             </Link>
           </div>
           <h1 className="page-title user-page__title">My list</h1>
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-            </div>
-          </div>
+          <UserBlock />
         </header>
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <MoviesList
-            films={films}
-            maxFilms={MoviesAmmount.MY_LIST_PAGE}
+            films={favoriteFilms}
           />
         </section>
         <footer className="page-footer">
@@ -52,12 +55,19 @@ const MyList = ({films}) => {
 };
 
 MyList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
+  favoriteFilms: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
+  loadFavoriteFilms: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({films}) => ({
-  films,
+const mapStateToProps = (state) => ({
+  favoriteFilms: getFavoriteFilms(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadFavoriteFilms() {
+    dispatch(fetchFavoriteFilmsList());
+  }
 });
 
 export {MyList};
-export default connect(mapStateToProps)(MyList);
+export default connect(mapStateToProps, mapDispatchToProps)(MyList);

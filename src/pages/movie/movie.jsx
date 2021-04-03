@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import MoviesList from '../../components/movies-list/movies-list';
 import UserBlock from '../../components/user-block/user-block';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import {connect} from 'react-redux';
-import {AuthorizationStatuses, MoviesAmmount, Url} from '../../consts';
+import {AuthorizationStatuses, Url} from '../../consts';
+import AddFavorite from '../../components/add-favorite/add-favorite';
 import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
-
-const getSimilarMovies = (films, genre, name) => films.filter((film) => film.genre === genre && film.name !== name);
+import {getSimmilarMoviesWithGenre} from '../../store/films/selectors';
+import {getAuthorizationStatus} from '../../store/auth/selectors';
+import {getReviews} from '../../store/comment/selectors';
+import {fetchComments} from '../../store/api-actions';
 
 
 // const FilmRatings = {
@@ -49,7 +52,7 @@ const getSimilarMovies = (films, genre, name) => films.filter((film) => film.gen
 // };
 
 
-const Movie = ({film, reviews, films, onPlayMovie, onAddFavoriteMovie, authorizationStatus}) => {
+const Movie = ({film, reviews, films, onPlayMovie, authorizationStatus, loadComments}) => {
 
   const {
     backgroundImage,
@@ -57,9 +60,15 @@ const Movie = ({film, reviews, films, onPlayMovie, onAddFavoriteMovie, authoriza
     genre,
     released,
     posterImage,
-    id
+    id,
+    isFavorite
   } = film;
 
+  useEffect(() => {
+    if (reviews[id] === undefined) {
+      loadComments(id);
+    }
+  }, [reviews]);
 
   return (
     <React.Fragment>
@@ -93,12 +102,10 @@ const Movie = ({film, reviews, films, onPlayMovie, onAddFavoriteMovie, authoriza
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button" onClick={() => onAddFavoriteMovie()}>
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <AddFavorite
+                  id={id}
+                  isFavorite={isFavorite}
+                />
                 {authorizationStatus === AuthorizationStatuses.AUTH
                   ? <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
                   : ``
@@ -115,7 +122,7 @@ const Movie = ({film, reviews, films, onPlayMovie, onAddFavoriteMovie, authoriza
             <div className="movie-card__desc">
               <MovieTabs
                 film={film}
-                reviews={reviews}
+                reviews={reviews[id]}
               />
             </div>
           </div>
@@ -124,10 +131,9 @@ const Movie = ({film, reviews, films, onPlayMovie, onAddFavoriteMovie, authoriza
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MoviesList
-            films={getSimilarMovies(films, genre, name)}
-            maxFilms={MoviesAmmount.MOVIE_PAGE}
-          />
+          {films.length !== 0 ? <MoviesList
+            films={films}
+          /> : ``}
         </section>
         <footer className="page-footer">
           <div className="logo">
@@ -149,17 +155,24 @@ const Movie = ({film, reviews, films, onPlayMovie, onAddFavoriteMovie, authoriza
 Movie.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP)).isRequired,
   film: PropTypes.shape(MOVIES_PROP).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP)).isRequired,
+  reviews: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP))),
   onPlayMovie: PropTypes.func.isRequired,
-  onAddFavoriteMovie: PropTypes.func.isRequired,
+  loadComments: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired
 };
 
 
-const mapStateToProps = ({films, authorizationStatus}) => ({
-  films,
-  authorizationStatus
+const mapStateToProps = (state) => ({
+  films: getSimmilarMoviesWithGenre(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  reviews: getReviews(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadComments(id) {
+    dispatch(fetchComments(id));
+  },
 });
 
 export {Movie};
-export default connect(mapStateToProps)(Movie);
+export default connect(mapStateToProps, mapDispatchToProps)(Movie);

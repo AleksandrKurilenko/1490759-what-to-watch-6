@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {login} from '../../store/api-actions';
 import {Url} from '../../consts';
 import ErrorMessage from '../../components/error-message/error-message';
+import {getFailedAuthorizationStatus} from '../../store/auth/selectors';
+
 
 const SignInScreen = ({onSubmit, isAuthorisationFailed}) => {
   const loginRef = useRef();
@@ -93,8 +95,8 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-const mapStateToProps = ({isAuthorisationFailed}) => ({
-  isAuthorisationFailed,
+const mapStateToProps = (state) => ({
+  isAuthorisationFailed: getFailedAuthorizationStatus(state),
 });
 
 export {SignInScreen};

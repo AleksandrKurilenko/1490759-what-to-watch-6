@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {getErrorMessage} from '../../store/auth/selectors';
 
 const ErrorMessage = ({errorMessage}) => {
   return (
@@ -16,8 +17,8 @@ ErrorMessage.propTypes = {
 };
 
 
-const mapStateToProps = ({errorMessage}) => ({
-  errorMessage,
+const mapStateToProps = (state) => ({
+  errorMessage: getErrorMessage(state),
 });
 
 export {ErrorMessage};

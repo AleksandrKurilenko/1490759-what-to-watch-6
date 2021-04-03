@@ -48,5 +48,5 @@ export const REVIEW_PROP = {
   }),
   rating: PropTypes.number.isRequired,
   comment: PropTypes.string.isRequired,
-  date: PropTypes.object.isRequired
+  date: PropTypes.string.isRequired
 };

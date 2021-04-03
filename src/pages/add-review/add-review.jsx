@@ -5,7 +5,7 @@ import AddReviewForm from '../../components/add-review-form/add-review-form';
 import UserBlock from '../../components/user-block/user-block';
 
 
-const AddReview = ({title, poster, backgroundImage, id}) => {
+const AddReview = ({title, poster, backgroundImage, filmID}) => {
 
   return (
     <React.Fragment>
@@ -26,7 +26,7 @@ const AddReview = ({title, poster, backgroundImage, id}) => {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to={`/films/${id}`} className="breadcrumbs__link">{title}</Link>
+                  <Link to={`/films/${filmID}`} className="breadcrumbs__link">{title}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -41,7 +41,7 @@ const AddReview = ({title, poster, backgroundImage, id}) => {
         </div>
         <div className="add-review">
           <AddReviewForm
-            id={id}
+            filmID={filmID}
           />
         </div>
       </section>
@@ -53,7 +53,7 @@ AddReview.propTypes = {
   title: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   backgroundImage: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired
+  filmID: PropTypes.number.isRequired
 };
 
 export default AddReview;

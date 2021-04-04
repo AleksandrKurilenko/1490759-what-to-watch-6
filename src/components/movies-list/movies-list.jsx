@@ -4,16 +4,17 @@ import MovieCard from '../movie-card/movie-card';
 import {MOVIES_PROP} from '../../utils/validate';
 
 
-const MoviesList = ({films, maxFilms}) => {
+const MoviesList = ({films}) => {
 
   return (
     <div className="catalog__movies-list">
-      {films.slice(0, maxFilms).map((film) => <MovieCard
+      {films.map((film) => <MovieCard
         key={film.id}
         id={film.id}
         title={film.name}
         poster={film.previeImage}
         previewVideoLink = {film.previewVideoLink}
+        genre={film.genre}
       />)}
     </div>
   );
@@ -21,7 +22,7 @@ const MoviesList = ({films, maxFilms}) => {
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
-  maxFilms: PropTypes.number.isRequired
+  maxFilms: PropTypes.number,
 };
 
 export default MoviesList;

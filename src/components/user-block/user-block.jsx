@@ -4,6 +4,7 @@ import NoLogin from '../no-login/no-login';
 import UserAvatar from '../user-avatar/user-avatar';
 import {connect} from 'react-redux';
 import {AuthorizationStatuses} from '../../consts';
+import {getAuthorizationStatus} from '../../store/auth/selectors';
 
 const UserBlock = ({authorizationStatus}) => {
   return (
@@ -17,8 +18,8 @@ UserBlock.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({authorizationStatus}) => ({
-  authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {UserBlock};

@@ -1,7 +1,3 @@
-export const MoviesAmmount = {
-  MY_LIST_PAGE: 8,
-  MOVIE_PAGE: 4
-};
 
 export const Url = {
   MAIN: `/`,

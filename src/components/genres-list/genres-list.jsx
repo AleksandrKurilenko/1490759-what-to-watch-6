@@ -10,7 +10,9 @@ const GenresList = ({onChangeGenres, genres}) => {
 
   return (
     <React.Fragment>
-      {genres.length !== null ? <ul className="catalog__genres-list">
+      {genres.length !== null ? <ul
+        className="catalog__genres-list"
+        data-testid="genreList">
         {genres.map((tab) => <GenreTab
           tab={tab}
           key={tab}
@@ -26,15 +28,16 @@ GenresList.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
+const mapStateToProps = (state) => ({
+  genres: getGenres(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onChangeGenres(type) {
     dispatch(changeGenres(type));
   },
 });
 
-const mapStateToProps = (state) => ({
-  genres: getGenres(state),
-});
 
 export {GenresList};
 export default connect(mapStateToProps, mapDispatchToProps)(memo(GenresList, (prevProps, nextProps) => prevProps.genres === nextProps.genres));

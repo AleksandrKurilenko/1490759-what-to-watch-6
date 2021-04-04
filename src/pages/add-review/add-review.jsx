@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import UserBlock from '../../components/user-block/user-block';
+import {ApiRoute, Url} from '../../consts';
 
 
 const AddReview = ({title, poster, backgroundImage, filmID}) => {
@@ -17,7 +18,7 @@ const AddReview = ({title, poster, backgroundImage, filmID}) => {
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header">
             <div className="logo">
-              <Link to="/" className="logo__link">
+              <Link to={Url.MAIN} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -26,7 +27,7 @@ const AddReview = ({title, poster, backgroundImage, filmID}) => {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to={`/films/${filmID}`} className="breadcrumbs__link">{title}</Link>
+                  <Link to={`${ApiRoute.FILMS}/${filmID}`} className="breadcrumbs__link">{title}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>

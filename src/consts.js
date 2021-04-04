@@ -14,7 +14,7 @@ export const ALL_GENRES_NAME_TAB = `All genres`;
 
 export const FILMS_AMOUNT_PER_STEP = 8;
 
-export const AuthorizationStatuses = {
+export const AuthorizationStatus = {
   AUTH: `Auth`,
   NO_AUTH: `NoAuth`
 };
@@ -22,4 +22,13 @@ export const AuthorizationStatuses = {
 export const AuthorizationErrorMessage = {
   DEFAULT: ``,
   EMAIL: `Please enter a valid email address or password`
+};
+
+export const ApiRoute = {
+  FILMS: `/films`,
+  LOGIN: `/login`,
+  LOGOUT: `/logout`,
+  FAVORITE: `/favorite`,
+  PROMO: `/films/promo`,
+  COMMENTS: `/comments`
 };

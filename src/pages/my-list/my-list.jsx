@@ -11,11 +11,12 @@ import {getFavoriteFilms} from '../../store/films/selectors';
 
 
 const MyList = ({favoriteFilms, loadFavoriteFilms}) => {
+
   useEffect(() => {
     if (favoriteFilms.length === 0) {
       loadFavoriteFilms();
     }
-  }, [favoriteFilms]);
+  }, [favoriteFilms.length]);
 
   return (
     <React.Fragment>

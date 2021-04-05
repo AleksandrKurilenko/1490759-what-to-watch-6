@@ -8,7 +8,7 @@ import {createMemoryHistory} from 'history';
 import {Url} from '../../consts';
 import {testStoreWithAuth} from '../../test-mock';
 import {MyList} from './my-list';
-import {NameSpace} from '../../store/main-reducer';
+import {NameSpace} from '../../store/root-reducer';
 
 const mockStore = configureStore({});
 const {[NameSpace.FILMS]: {favoriteFilms}} = testStoreWithAuth;

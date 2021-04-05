@@ -5,6 +5,7 @@ import {authorization, authorizationFailed, redirectToRoute} from '../action';
 import {AuthorizationErrorMessage, AuthorizationStatus, ApiRoute, Url} from '../../consts';
 import {checkLogin, login, logout} from '../api-actions';
 
+
 const api = createAPI(() => {});
 describe(`Reducers work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {

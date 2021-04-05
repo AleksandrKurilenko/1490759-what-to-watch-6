@@ -1,6 +1,7 @@
 import {AuthorizationErrorMessage} from "../consts";
 import {createAction} from '@reduxjs/toolkit';
 
+
 export const ActionType = {
   CHANGE_GENRE: `genres/change`,
   LOAD_GENRES: `genres/load`,

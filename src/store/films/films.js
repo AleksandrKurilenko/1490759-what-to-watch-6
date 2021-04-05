@@ -2,6 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {ActionType} from '../action';
 import {FILMS_AMOUNT_PER_STEP} from '../../consts';
 
+
 const findFilmIndex = (films, id) => films.findIndex((film) => film.id === id);
 
 const initialState = {

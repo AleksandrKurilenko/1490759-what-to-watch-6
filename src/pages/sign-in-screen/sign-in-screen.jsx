@@ -7,7 +7,9 @@ import {AuthorizationStatus, Url} from '../../consts';
 import ErrorMessage from '../../components/error-message/error-message';
 import {getAuthorizationStatus, getFailedAuthorizationStatus} from '../../store/auth/selectors';
 
+
 const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus}) => {
+
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -83,7 +85,6 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus}) =>
     </React.Fragment>
   );
 };
-
 
 SignInScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,

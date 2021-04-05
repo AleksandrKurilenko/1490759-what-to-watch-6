@@ -2,6 +2,7 @@ import {ALL_GENRES_NAME_TAB} from '../../consts';
 import {changeGenres, loadGenres} from '../action';
 import {genre} from './genre';
 
+
 describe(`Reducers work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     const initialState = {

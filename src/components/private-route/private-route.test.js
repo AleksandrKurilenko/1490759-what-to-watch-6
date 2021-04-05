@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import PrivateRoute from './private-route';
 import {AuthorizationStatus} from '../../consts';
-import {NameSpace} from '../../store/main-reducer';
+import {NameSpace} from '../../store/root-reducer';
 
 const mockStore = configureStore({});
 let history;

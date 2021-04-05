@@ -5,6 +5,7 @@ import {addFavorite} from '../../store/api-actions';
 
 
 const AddFavorite = ({id, isFavorite, addFavoriteFilm}) => {
+
   return (
     <button className="btn btn--list movie-card__button" type="button" onClick={() => addFavoriteFilm(id, Number(!isFavorite))}>
       <svg viewBox="0 0 19 20" width={19} height={20}>

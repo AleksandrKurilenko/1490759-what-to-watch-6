@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {getDuration} from '../../utils/common';
 
+
 const MovieDetails = ({duration, genre, released, director, starring}) => {
 
   return (

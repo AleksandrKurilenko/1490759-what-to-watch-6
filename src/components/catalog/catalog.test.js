@@ -6,7 +6,7 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {Catalog} from './catalog';
 import {testStoreWithAuth} from '../../test-mock';
-import {NameSpace} from '../../store/main-reducer';
+import {NameSpace} from '../../store/root-reducer';
 
 const mockStore = configureStore({});
 const {[NameSpace.GENRE]: {genre}, [NameSpace.FILMS]: {films}} = testStoreWithAuth;

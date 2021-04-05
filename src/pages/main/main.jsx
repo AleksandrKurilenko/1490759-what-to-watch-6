@@ -8,10 +8,8 @@ const Main = () => {
   return (
     <React.Fragment>
       <Header />
-
       <div className="page-content" data-testid="mainContent">
         <Catalog />
-
         <footer className="page-footer">
           <div className="logo">
             <a className="logo__link logo__link--light">
@@ -20,7 +18,6 @@ const Main = () => {
               <span className="logo__letter logo__letter--3">W</span>
             </a>
           </div>
-
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>

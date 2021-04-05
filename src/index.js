@@ -7,7 +7,7 @@ import {AuthorizationStatus} from './consts';
 import {checkLogin} from './store/api-actions';
 import {redirect} from "./store/middlewares/redirect";
 import {configureStore} from '@reduxjs/toolkit';
-import mainReducer from './store/main-reducer';
+import mainReducer from './store/root-reducer';
 import {authorization, authorizationFailed, postCommentError} from './store/action';
 import {Router as BrowserRouter} from 'react-router-dom';
 import browserHistory from "./browser-history";

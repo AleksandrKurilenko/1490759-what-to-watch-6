@@ -9,7 +9,9 @@ import PromoMovie from '../promo-movie/promo-movie';
 import {fetchPromoFilm} from '../../store/api-actions';
 import {MOVIES_NOT_REQUIRE_PROP} from '../../utils/validate';
 
+
 const Header = ({promoMovie, loadPromoFilm}) => {
+
   useEffect(() => {
     if (promoMovie === null) {
       loadPromoFilm();
@@ -42,7 +44,6 @@ Header.propTypes = {
   promoMovie: PropTypes.shape(MOVIES_NOT_REQUIRE_PROP),
 
 };
-
 
 const mapStateToProps = (state) => ({
   promoMovie: getPromoMovie(state)

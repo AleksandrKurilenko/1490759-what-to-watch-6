@@ -1,14 +1,13 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {login} from '../../store/api-actions';
-import {Url} from '../../consts';
+import {AuthorizationStatus, Url} from '../../consts';
 import ErrorMessage from '../../components/error-message/error-message';
-import {getFailedAuthorizationStatus} from '../../store/auth/selectors';
+import {getAuthorizationStatus, getFailedAuthorizationStatus} from '../../store/auth/selectors';
 
-
-const SignInScreen = ({onSubmit, isAuthorisationFailed}) => {
+const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus}) => {
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -21,10 +20,9 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed}) => {
     });
   };
 
-
   return (
     <React.Fragment>
-      <div className="user-page">
+      {authorizationStatus === AuthorizationStatus.AUTH ? <Redirect to={Url.MAIN} /> : <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
             <Link to={Url.MAIN} className="logo__link">
@@ -47,6 +45,7 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed}) => {
                   placeholder="Email address"
                   name="user-email"
                   id="user-email"
+                  data-testid="login"
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
@@ -58,6 +57,7 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed}) => {
                   placeholder="Password"
                   name="user-password"
                   id="user-password"
+                  data-testid="password"
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
@@ -79,15 +79,22 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed}) => {
             <p>© 2019 What to watch Ltd.</p>
           </div>
         </footer>
-      </div>
+      </div>}
     </React.Fragment>
   );
 };
 
+
 SignInScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  isAuthorisationFailed: PropTypes.bool.isRequired
+  isAuthorisationFailed: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  isAuthorisationFailed: getFailedAuthorizationStatus(state),
+  authorizationStatus: getAuthorizationStatus(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
@@ -95,10 +102,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-const mapStateToProps = (state) => ({
-  isAuthorisationFailed: getFailedAuthorizationStatus(state),
-});
-
 export {SignInScreen};
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
-

@@ -1,15 +1,7 @@
-import {AuthorizationStatuses, Url} from "../consts";
+import {AuthorizationStatus, Url, ApiRoute} from "../consts";
 import {loadFilm, loadFilms, redirectToRoute, postComment, authorization, loadFavoriteFilms, addFavoriteFilmsList, removeFavoriteFilmsList, loadPromoFilm, loadGenres, loadComments} from "./action";
 import browserHistory from "../browser-history";
 
-
-const Routes = {
-  FILMS: `/films`,
-  LOGIN: `/login`,
-  LOGOUT: `/logout`,
-  FAVORITE: `/favorite`,
-  PROMO: `/films/promo`
-};
 
 const adaptToClient = (film) => {
   const adaptedFilm = {
@@ -44,7 +36,7 @@ const adaptToServer = (comment) => {
 };
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
-  api.get(Routes.FILMS)
+  api.get(ApiRoute.FILMS)
     .then(({data}) => data.map(adaptToClient))
     .then((data) => {
       dispatch(loadGenres(data));
@@ -53,40 +45,40 @@ export const fetchFilmsList = () => (dispatch, _getState, api) => (
 );
 
 export const fetchFavoriteFilmsList = () => (dispatch, _getState, api) => (
-  api.get(Routes.FAVORITE)
+  api.get(ApiRoute.FAVORITE)
     .then(({data}) => data.map(adaptToClient))
     .then((data) => dispatch(loadFavoriteFilms(data)))
+    .catch(() => {})
 );
 
 export const fetchFilm = (id) => (dispatch, _getState, api) => (
-  api.get(`/films/${id}`)
+  api.get(`${ApiRoute.FILMS}/${id}`)
     .then(({data}) => adaptToClient(data))
     .then((data) => dispatch(loadFilm(data)))
-    .catch(() => dispatch(redirectToRoute(Url.NOT_FOUND)))
 );
 
 export const fetchPromoFilm = () => (dispatch, _getState, api) => (
-  api.get(Routes.PROMO)
+  api.get(ApiRoute.PROMO)
     .then(({data}) => adaptToClient(data))
     .then((data) => dispatch(loadPromoFilm(data)))
     .catch(() => {})
 );
 
 export const fetchComments = (filmID) => (dispatch, _getState, api) => (
-  api.get(`/comments/${filmID}`)
+  api.get(`${ApiRoute.COMMENTS}/${filmID}`)
     .then(({data}) => dispatch(loadComments(data, filmID)))
     .catch(() => {})
 );
 
 export const addComment = (id, comment) => (dispatch, _getState, api) => (
-  api.post(`/comments/${id}`, adaptToServer(comment))
+  api.post(`${ApiRoute.COMMENTS}/${id}`, adaptToServer(comment))
     .then(({data}) => dispatch(postComment(data, id)))
     .then(() => dispatch(redirectToRoute(`/films/${id}`)))
     .catch(() => { })
 );
 
 export const addFavorite = (id, status) => (dispatch, _getState, api) => (
-  api.post(`/favorite/${id}/${status}`)
+  api.post(`${ApiRoute.FAVORITE}/${id}/${status}`)
     .then(({data}) => adaptToClient(data))
     .then((data) => {
       return status === 1 ? dispatch(addFavoriteFilmsList(data)) : dispatch(removeFavoriteFilmsList(data.id));
@@ -95,21 +87,21 @@ export const addFavorite = (id, status) => (dispatch, _getState, api) => (
 );
 
 export const checkLogin = () => (dispatch, _getState, api) => (
-  api.get(Routes.LOGIN)
-    .then(() => dispatch(authorization(AuthorizationStatuses.AUTH)))
+  api.get(ApiRoute.LOGIN)
+    .then(({data}) => dispatch(authorization(AuthorizationStatus.AUTH, data.avatar_url)))
     .catch(() => { })
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(Routes.LOGIN, {email, password})
-    .then(() => dispatch(authorization(AuthorizationStatuses.AUTH)))
+  api.post(ApiRoute.LOGIN, {email, password})
+  .then(({data}) => dispatch(authorization(AuthorizationStatus.AUTH, data.avatar_url)))
     .then(() => dispatch(redirectToRoute(Url.MAIN)))
     .catch(() => { })
 );
 
 export const logout = () => (dispatch, _getState, api) => (
-  api.get(Routes.LOGOUT)
-    .then(() => dispatch(authorization(AuthorizationStatuses.NO_AUTH)))
+  api.get(ApiRoute.LOGOUT)
+    .then(() => dispatch(authorization(AuthorizationStatus.NO_AUTH)))
     .then(() => {
       if (browserHistory.location.pathname !== Url.MAIN) {
         dispatch(redirectToRoute(Url.MAIN));

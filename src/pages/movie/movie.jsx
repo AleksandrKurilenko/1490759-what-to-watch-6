@@ -1,17 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import MoviesList from '../../components/movies-list/movies-list';
 import UserBlock from '../../components/user-block/user-block';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import {connect} from 'react-redux';
-import {AuthorizationStatuses, Url} from '../../consts';
+import {AuthorizationStatus, Url} from '../../consts';
 import AddFavorite from '../../components/add-favorite/add-favorite';
-import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
+import {MOVIES_PROP} from '../../utils/validate';
 import {getSimmilarMoviesWithGenre} from '../../store/films/selectors';
 import {getAuthorizationStatus} from '../../store/auth/selectors';
-import {getReviews} from '../../store/comment/selectors';
-import {fetchComments} from '../../store/api-actions';
 
 
 // const FilmRatings = {
@@ -52,7 +50,7 @@ import {fetchComments} from '../../store/api-actions';
 // };
 
 
-const Movie = ({film, reviews, films, onPlayMovie, authorizationStatus, loadComments}) => {
+const Movie = ({film, films, onPlayMovie, authorizationStatus}) => {
 
   const {
     backgroundImage,
@@ -61,18 +59,14 @@ const Movie = ({film, reviews, films, onPlayMovie, authorizationStatus, loadComm
     released,
     posterImage,
     id,
-    isFavorite
+    isFavorite,
+    backgroundColor
   } = film;
 
-  useEffect(() => {
-    if (reviews[id] === undefined) {
-      loadComments(id);
-    }
-  }, [reviews]);
 
   return (
     <React.Fragment>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{background: backgroundColor}}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img src={backgroundImage} alt={name} />
@@ -106,8 +100,8 @@ const Movie = ({film, reviews, films, onPlayMovie, authorizationStatus, loadComm
                   id={id}
                   isFavorite={isFavorite}
                 />
-                {authorizationStatus === AuthorizationStatuses.AUTH
-                  ? <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.AUTH
+                  ? <Link to={`/films/${id}/review`} className="btn movie-card__button movie-card__add-review">Add review</Link>
                   : ``
                 }
               </div>
@@ -122,7 +116,6 @@ const Movie = ({film, reviews, films, onPlayMovie, authorizationStatus, loadComm
             <div className="movie-card__desc">
               <MovieTabs
                 film={film}
-                reviews={reviews[id]}
               />
             </div>
           </div>
@@ -155,9 +148,7 @@ const Movie = ({film, reviews, films, onPlayMovie, authorizationStatus, loadComm
 Movie.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP)).isRequired,
   film: PropTypes.shape(MOVIES_PROP).isRequired,
-  reviews: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP))),
   onPlayMovie: PropTypes.func.isRequired,
-  loadComments: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired
 };
 
@@ -165,14 +156,7 @@ Movie.propTypes = {
 const mapStateToProps = (state) => ({
   films: getSimmilarMoviesWithGenre(state),
   authorizationStatus: getAuthorizationStatus(state),
-  reviews: getReviews(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadComments(id) {
-    dispatch(fetchComments(id));
-  },
 });
 
 export {Movie};
-export default connect(mapStateToProps, mapDispatchToProps)(Movie);
+export default connect(mapStateToProps)(Movie);

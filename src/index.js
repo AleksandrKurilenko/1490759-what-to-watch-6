@@ -3,17 +3,20 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app";
 import {Provider} from 'react-redux';
 import {createAPI} from "./services/api";
-import {AuthorizationStatuses} from './consts';
+import {AuthorizationStatus} from './consts';
 import {checkLogin} from './store/api-actions';
 import {redirect} from "./store/middlewares/redirect";
 import {configureStore} from '@reduxjs/toolkit';
 import mainReducer from './store/main-reducer';
-import {authorization, authorizationFailed} from './store/action';
+import {authorization, authorizationFailed, postCommentError} from './store/action';
+import {Router as BrowserRouter} from 'react-router-dom';
+import browserHistory from "./browser-history";
 
 
 const api = createAPI(
-    () => store.dispatch(authorization(AuthorizationStatuses.NO_AUTH)),
-    () => store.dispatch(authorizationFailed())
+    () => store.dispatch(authorization(AuthorizationStatus.NO_AUTH)),
+    () => store.dispatch(authorizationFailed()),
+    () => store.dispatch(postCommentError())
 );
 
 const store = configureStore({
@@ -30,7 +33,9 @@ store.dispatch(checkLogin());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <BrowserRouter history={browserHistory}>
+        <App />
+      </BrowserRouter>
     </Provider>,
     document.querySelector(`#root`)
 );

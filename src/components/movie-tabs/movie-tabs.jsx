@@ -3,20 +3,28 @@ import PropTypes from 'prop-types';
 import MovieDetails from '../movie-details/movie-details';
 import MovieOverview from '../movie-overview/movie-overview';
 import MovieReview from '../movie-reviews/movie-reviews';
-import {MOVIES_PROP, REVIEW_PROP} from '../../utils/validate';
+import {MOVIES_PROP} from '../../utils/validate';
 
-const MovieTabs = ({film, reviews}) => {
+const MovieTabs = ({film}) => {
   const getActiveTab = () => {
     if (activeTab.details) {
       return <MovieDetails
-        film ={film}
+        duration={film.runTime}
+        genre={film.genre}
+        released={film.released}
+        director={film.director}
+        starring={film.starring}
       />;
     } else if (activeTab.overview) {
       return <MovieOverview
-        film={film}
+        rating={film.rating}
+        scoresCount={film.scoresCount}
+        description={film.description}
+        director={film.director}
+        starring={film.starring}
       />;
     }
-    return <MovieReview reviews={reviews} />;
+    return <MovieReview filmID={film.id} />;
   };
 
   const [activeTab, setActiveTab] = useState({overview: true, details: false, review: false});
@@ -63,7 +71,6 @@ const MovieTabs = ({film, reviews}) => {
 
 MovieTabs.propTypes = {
   film: PropTypes.shape(MOVIES_PROP).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape(REVIEW_PROP))
 };
 
 export default MovieTabs;

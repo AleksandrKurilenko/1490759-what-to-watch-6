@@ -7,7 +7,7 @@ import {MOVIES_PROP} from '../../utils/validate';
 const MoviesList = ({films}) => {
 
   return (
-    <div className="catalog__movies-list">
+    <div className="catalog__movies-list" data-testid="movieList">
       {films.map((film) => <MovieCard
         key={film.id}
         id={film.id}
@@ -22,7 +22,6 @@ const MoviesList = ({films}) => {
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape(MOVIES_PROP).isRequired).isRequired,
-  maxFilms: PropTypes.number,
 };
 
 export default MoviesList;

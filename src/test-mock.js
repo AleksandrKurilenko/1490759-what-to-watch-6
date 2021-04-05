@@ -1,5 +1,6 @@
 import {AuthorizationStatus} from "./consts";
-import {NameSpace} from "./store/main-reducer";
+import {NameSpace} from "./store/root-reducer";
+
 
 export const testFilm = {
   id: 1,

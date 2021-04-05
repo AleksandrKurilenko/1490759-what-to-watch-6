@@ -5,6 +5,7 @@ import {addFavoriteFilmsList, getFilmGenre, getFilmName, loadFavoriteFilms, load
 import {films} from './films';
 import {addFavorite, fetchFavoriteFilmsList, fetchFilm, fetchFilmsList, fetchPromoFilm} from '../api-actions';
 
+
 const api = createAPI(() => {});
 
 const fakeFilm = {

@@ -5,7 +5,9 @@ import VideoPreview from '../video-preview/video-preview';
 import {connect} from 'react-redux';
 import {getFilmGenre, getFilmName, resetAmountShowFilms} from '../../store/action';
 
+
 const MovieCard = ({title, poster, id, genre, previewVideoLink, resetShowFilmsAmount, getName, getGenre}) => {
+
   const history = useHistory();
 
   const [isActive, setIsActive] = useState(false);
@@ -16,15 +18,11 @@ const MovieCard = ({title, poster, id, genre, previewVideoLink, resetShowFilmsAm
     setIsPlaying(true);
   };
 
-  const onMouseLeaveMovieCard = () => {
-    setIsActive(false);
-  };
+  const onMouseLeaveMovieCard = () => setIsActive(false);
 
   return (
     <article className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => {
-        onMouseEnterMovieCard();
-      }}
+      onMouseEnter={() => onMouseEnterMovieCard()}
       onMouseLeave={() => onMouseLeaveMovieCard()}
       onClick={() => {
         resetShowFilmsAmount();

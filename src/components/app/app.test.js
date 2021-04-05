@@ -7,7 +7,7 @@ import configureStore from 'redux-mock-store';
 import {App} from './app';
 import {testFilm, testStoreWithAuth, testStoreWithoutAuth} from '../../test-mock';
 import {AuthorizationStatus, ApiRoute, Url} from '../../consts';
-import {NameSpace} from '../../store/main-reducer';
+import {NameSpace} from '../../store/root-reducer';
 
 const mockStore = configureStore({});
 const {[NameSpace.FILMS]: {films, loadedFilm}} = testStoreWithAuth;

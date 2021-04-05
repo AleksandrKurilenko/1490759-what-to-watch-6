@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import {Provider} from 'react-redux';
 import {testStoreWithAuth} from '../../test-mock';
 import {MovieReviews} from './movie-reviews';
-import {NameSpace} from '../../store/main-reducer';
+import {NameSpace} from '../../store/root-reducer';
 
 const mockStore = configureStore({});
 const {[NameSpace.COMMENT]: {reviews}} = testStoreWithAuth;

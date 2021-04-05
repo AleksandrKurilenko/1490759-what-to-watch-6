@@ -10,7 +10,9 @@ import {getActiveGenre} from '../../store/genre/selectors';
 import {getMinimalShowFilms, renderShowMoreButton} from '../../store/films/selectors';
 import {fetchFilmsList} from '../../store/api-actions';
 
+
 const Catalog = ({genre, films, renderButton, loadFilms}) => {
+
   useEffect(() => {
     if (films.length === 0) {
       loadFilms();

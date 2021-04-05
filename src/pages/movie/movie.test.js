@@ -7,7 +7,7 @@ import {Provider} from 'react-redux';
 import {ApiRoute, Url} from '../../consts';
 import {testFilm, testStoreWithAuth} from '../../test-mock';
 import {Movie} from './movie';
-import {NameSpace} from '../../store/main-reducer';
+import {NameSpace} from '../../store/root-reducer';
 import userEvent from '@testing-library/user-event';
 
 const mockStore = configureStore({});

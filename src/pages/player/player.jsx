@@ -6,7 +6,9 @@ import {getRemainedDuration} from '../../utils/common';
 const Player = ({title, video, poster}) => {
 
   const videoRef = createRef();
+
   const history = useHistory();
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [onPlaying, setOnPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -71,6 +73,5 @@ Player.propTypes = {
   video: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired
 };
-
 
 export default Player;

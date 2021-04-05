@@ -6,7 +6,7 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {UserBlock} from './user-block';
 import {testStoreWithAuth} from '../../test-mock';
-import {NameSpace} from '../../store/main-reducer';
+import {NameSpace} from '../../store/root-reducer';
 
 
 const mockStore = configureStore({});

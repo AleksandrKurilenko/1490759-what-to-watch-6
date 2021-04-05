@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getErrorMessage} from '../../store/auth/selectors';
 
+
 const ErrorMessage = ({errorMessage}) => {
   return (
     <div className="sign-in__message">
@@ -11,11 +12,9 @@ const ErrorMessage = ({errorMessage}) => {
   );
 };
 
-
 ErrorMessage.propTypes = {
   errorMessage: PropTypes.string.isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   errorMessage: getErrorMessage(state),

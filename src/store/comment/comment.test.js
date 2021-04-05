@@ -4,6 +4,7 @@ import {activeForm, loadComments, postComment, redirectToRoute, resetErrorMessag
 import {addComment, fetchComments} from '../api-actions';
 import {comment} from './comment';
 
+
 const api = createAPI(() => {});
 
 describe(`Reducers work correctly`, () => {

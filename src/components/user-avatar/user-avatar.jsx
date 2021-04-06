@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {logout} from '../../store/api-actions';
 import {getUserAvatar} from '../../store/auth/selectors';
 
+
 const UserAvatar = ({userLogout, avatar}) => {
 
   const history = useHistory();

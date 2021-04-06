@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {showMoreFilms} from '../../store/action';
 
+
 const ShowMoreButton = ({showMoreMovies}) => {
   return (
     <div className="catalog__more">

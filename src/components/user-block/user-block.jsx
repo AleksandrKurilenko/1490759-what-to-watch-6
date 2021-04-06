@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {AuthorizationStatus} from '../../consts';
 import {getAuthorizationStatus} from '../../store/auth/selectors';
 
+
 const UserBlock = ({authorizationStatus}) => {
   return (
     <div className="user-block">

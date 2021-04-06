@@ -1,7 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FilmRatings} from '../../consts';
 
+
+export const FilmRatings = {
+  Bad: {
+    DESCRIPTION: `Bad`,
+    RATING: 0
+  },
+  Normal: {
+    DESCRIPTION: `Normal`,
+    RATING: 3
+  },
+  Good: {
+    DESCRIPTION: `Good`,
+    RATING: 5
+  },
+  VeryGood: {
+    DESCRIPTION: `Very Good`,
+    RATING: 8
+  },
+  Awesome: {
+    DESCRIPTION: `Awesome`,
+    RATING: 10
+  }
+};
 
 const getDescriptionRating = (rating) => {
   if (rating < FilmRatings.Normal.RATING) {

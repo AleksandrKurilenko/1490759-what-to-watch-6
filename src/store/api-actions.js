@@ -4,34 +4,36 @@ import browserHistory from "../browser-history";
 
 
 const adaptToClient = (film) => {
-  const adaptedFilm = {
-    name: film.name,
+  const adaptedFilm = Object.assign({}, film, {
     posterImage: film.poster_image,
     previeImage: film.preview_image,
     backgroundImage: film.background_image,
     backgroundColor: film.background_color,
-    description: film.description,
-    rating: film.rating,
     scoresCount: film.scores_count,
-    director: film.director,
-    starring: film.starring,
     runTime: film.run_time,
-    genre: film.genre,
-    released: film.released,
-    id: film.id,
     isFavorite: film.is_favorite,
     videoLink: film.video_link,
     previewVideoLink: film.preview_video_link
-  };
-
+  }
+  );
+  delete adaptedFilm.poster_image;
+  delete adaptedFilm.preview_image;
+  delete adaptedFilm.background_image;
+  delete adaptedFilm.background_color;
+  delete adaptedFilm.scores_count;
+  delete adaptedFilm.run_time;
+  delete adaptedFilm.is_favorite;
+  delete adaptedFilm.video_link;
+  delete adaptedFilm.preview_video_link;
   return adaptedFilm;
 };
 
 const adaptToServer = (comment) => {
-  const adaptedComment = {
+  const adaptedComment = Object.assign({}, comment, {
     comment: comment.text
-  };
-
+  }
+  );
+  delete adaptedComment.text;
   return adaptedComment;
 };
 

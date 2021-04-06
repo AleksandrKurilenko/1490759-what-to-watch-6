@@ -8,6 +8,7 @@ import {getActiveCommentFormStatus, getErrorMessage} from '../../store/comment/s
 
 
 const DEFAULT_RATING = 10;
+
 const RATING_STARS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const CommentLength = {
@@ -90,7 +91,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(resetErrorMessage());
   }
 });
-
 
 export {AddReviewForm};
 export default connect(mapStateToProps, mapDispatchToProps)(AddReviewForm);

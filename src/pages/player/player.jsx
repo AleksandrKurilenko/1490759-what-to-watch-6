@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {getRemainedDuration} from '../../utils/common';
 
+
 const Player = ({title, video, poster}) => {
 
   const videoRef = createRef();

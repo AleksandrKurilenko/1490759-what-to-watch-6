@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Url} from '../../consts';
 import UserBlock from '../user-block/user-block';
 
+
 const NotFoundPage = () => {
   return (
     <React.Fragment>

@@ -28,10 +28,11 @@ const adaptToClient = (film) => {
 };
 
 const adaptToServer = (comment) => {
-  const adaptedComment = {
+  const adaptedComment = Object.assign({}, comment, {
     comment: comment.text
-  };
-
+  }
+  );
+  delete adaptedComment.text;
   return adaptedComment;
 };
 

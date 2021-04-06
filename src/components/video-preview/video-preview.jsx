@@ -1,6 +1,7 @@
 import React, {createRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
+
 const TIMEOUT_VIDEO_PLAY = 1000;
 
 const VideoPreview = ({poster, url, isPlaying, setIsPlaying}) => {

@@ -5,6 +5,7 @@ import MovieOverview from '../movie-overview/movie-overview';
 import MovieReview from '../movie-reviews/movie-reviews';
 import {MOVIES_PROP} from '../../utils/validate';
 
+
 const MovieTabs = ({film}) => {
   const getActiveTab = () => {
     if (activeTab.details) {

@@ -59,6 +59,7 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus, aut
                   ref={passwordRef}
                   className="sign-in__input"
                   type="password"
+                  required="required"
                   placeholder="Password"
                   name="user-password"
                   id="user-password"

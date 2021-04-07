@@ -14,6 +14,7 @@ const mockStore = configureStore({});
 describe(`Test SignInScreen`, () => {
   it(`SignInScreen should render correctly`, () => {
     const onSubmit = jest.fn();
+    const authorizationError = false;
     const isAuthorisationFailed = false;
     const history = createMemoryHistory();
     const authorizationStatus = AuthorizationStatus.NO_AUTH;
@@ -23,6 +24,7 @@ describe(`Test SignInScreen`, () => {
         <Provider store={mockStore(testStoreWithoutAuth)}>
           <Router history={history}>
             <SignInScreen
+              authorizationError={authorizationError}
               onSubmit={onSubmit}
               isAuthorisationFailed={isAuthorisationFailed}
               authorizationStatus={authorizationStatus}
@@ -45,6 +47,7 @@ describe(`Test SignInScreen`, () => {
   it(`When a user clicks on 'Sign in' should be change user data`, () => {
     const history = createMemoryHistory();
     history.push(Url.SIGN_IN);
+    const authorizationError = false;
     const isAuthorisationFailed = false;
     const authorizationStatus = AuthorizationStatus.NO_AUTH;
     const onSubmit = jest.fn();
@@ -69,6 +72,7 @@ describe(`Test SignInScreen`, () => {
         <Provider store={mockStore(testStoreWithoutAuth)}>
           <Router history={history}>
             <SignInScreen
+              authorizationError={authorizationError}
               onSubmit={onSubmit}
               isAuthorisationFailed={isAuthorisationFailed}
               authorizationStatus={authorizationStatus}

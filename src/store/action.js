@@ -53,6 +53,8 @@ export const postComment = createAction(ActionType.POST_COMMENT, (comments, id) 
   };
 });
 
+export const authorizationErrorAction = createAction(`ERR`);
+
 export const postCommentError = createAction(ActionType.POST_COMMENT_FAILED);
 
 export const resetErrorMessage = createAction(ActionType.RESET_ERROR_MESSAGE);

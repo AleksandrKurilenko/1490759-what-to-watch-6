@@ -7,7 +7,7 @@ it(`LoadingScreen should render correctly`, () => {
       <LoadingScreen />
   );
 
-  const loadingTextElement = getByText(`Loading...`);
+  const loadingTextElement = getByText(`Please. Wait for a response from the server...`);
 
   expect(loadingTextElement).toBeInTheDocument();
 });

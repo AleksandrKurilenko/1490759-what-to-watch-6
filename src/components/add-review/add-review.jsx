@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AddReviewForm from '../../components/add-review-form/add-review-form';
-import UserBlock from '../../components/user-block/user-block';
+import AddReviewForm from '../add-review-form/add-review-form';
+import UserBlock from '../user-block/user-block';
 import {ApiRoute, Url} from '../../consts';
 
 

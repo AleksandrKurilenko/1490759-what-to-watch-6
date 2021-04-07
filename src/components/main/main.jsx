@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/header/header';
-import Catalog from '../../components/catalog/catalog';
+import Header from '../header/header';
+import Catalog from '../catalog/catalog';
 
 
 const Main = () => {

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import MoviesList from '../../components/movies-list/movies-list';
-import UserBlock from '../../components/user-block/user-block';
-import MovieTabs from '../../components/movie-tabs/movie-tabs';
+import MoviesList from '../movies-list/movies-list';
+import UserBlock from '../user-block/user-block';
+import MovieTabs from '../movie-tabs/movie-tabs';
 import {connect} from 'react-redux';
 import {AuthorizationStatus, Url} from '../../consts';
-import AddFavorite from '../../components/add-favorite/add-favorite';
+import AddFavorite from '../add-favorite/add-favorite';
 import {MOVIES_PROP} from '../../utils/validate';
 import {getSimmilarMoviesWithGenre} from '../../store/films/selectors';
 import {getAuthorizationStatus} from '../../store/auth/selectors';

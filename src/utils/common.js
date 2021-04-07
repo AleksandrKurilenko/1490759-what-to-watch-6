@@ -1,4 +1,4 @@
-import {ALL_GENRES_NAME_TAB} from "../consts";
+import {ALL_GENRES_NAME_TAB, EMAIL_REGEX} from "../consts";
 
 export const getDuration = (duration) => {
   return {
@@ -28,4 +28,8 @@ export const getGenresName = (films) => {
   });
 
   return genres;
+};
+
+export const validateEmail = (email) => {
+  return EMAIL_REGEX.test(String(email).toLowerCase());
 };

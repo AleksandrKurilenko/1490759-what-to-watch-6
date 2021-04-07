@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import MoviesList from '../../components/movies-list/movies-list';
+import MoviesList from '../movies-list/movies-list';
 import {Url} from '../../consts';
 import {MOVIES_PROP} from '../../utils/validate';
-import UserBlock from '../../components/user-block/user-block';
+import UserBlock from '../user-block/user-block';
 import {fetchFavoriteFilmsList} from "../../store/api-actions";
 import {getFavoriteFilms} from '../../store/films/selectors';
 

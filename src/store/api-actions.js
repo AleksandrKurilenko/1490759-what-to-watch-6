@@ -1,5 +1,5 @@
 import {AuthorizationStatus, Url, ApiRoute} from "../consts";
-import {loadFilm, loadFilms, redirectToRoute, postComment, authorization, loadFavoriteFilms, addFavoriteFilmsList, removeFavoriteFilmsList, loadPromoFilm, loadGenres, loadComments} from "./action";
+import {loadFilm, loadFilms, redirectToRoute, postComment, authorization, loadFavoriteFilms, addFavoriteFilmsList, removeFavoriteFilmsList, loadPromoFilm, loadGenres, loadComments, authorizationErrorAction} from "./action";
 import browserHistory from "../browser-history";
 
 
@@ -96,8 +96,13 @@ export const checkLogin = () => (dispatch, _getState, api) => (
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(ApiRoute.LOGIN, {email, password})
   .then(({data}) => dispatch(authorization(AuthorizationStatus.AUTH, data.avatar_url)))
+    .then(() => dispatch(authorizationErrorAction(false)))
     .then(() => dispatch(redirectToRoute(Url.MAIN)))
-    .catch(() => { })
+    .catch((err) => {
+      if (err) {
+        dispatch(authorizationErrorAction(true));
+      }
+    })
 );
 
 export const logout = () => (dispatch, _getState, api) => (

@@ -3,23 +3,25 @@ import PropTypes from 'prop-types';
 import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {login} from '../../store/api-actions';
-import {AuthorizationStatus, Url} from '../../consts';
-import ErrorMessage from '../../components/error-message/error-message';
-import {getAuthorizationStatus, getFailedAuthorizationStatus} from '../../store/auth/selectors';
+import {AuthorizationErrorMessage, AuthorizationStatus, Url} from '../../consts';
+import ErrorMessage from '../error-message/error-message';
+import {getAuthorizationError, getAuthorizationStatus, getFailedAuthorizationStatus} from '../../store/auth/selectors';
+import {validateEmail} from '../../utils/common';
 
 
-const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus}) => {
+const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus, authorizationError}) => {
 
   const loginRef = useRef();
   const passwordRef = useRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    onSubmit({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
-    });
+    if (validateEmail(loginRef.current.value)) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    }
   };
 
   return (
@@ -44,6 +46,7 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus}) =>
                   ref={loginRef}
                   className="sign-in__input"
                   type="email"
+                  required="required"
                   placeholder="Email address"
                   name="user-email"
                   id="user-email"
@@ -64,6 +67,7 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus}) =>
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>
+            {authorizationError && <div>{AuthorizationErrorMessage.EMAIL}</div>}
             <div className="sign-in__submit">
               <button className="sign-in__btn" type="submit">Sign in</button>
             </div>
@@ -89,12 +93,14 @@ const SignInScreen = ({onSubmit, isAuthorisationFailed, authorizationStatus}) =>
 SignInScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isAuthorisationFailed: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
+  authorizationError: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
   isAuthorisationFailed: getFailedAuthorizationStatus(state),
-  authorizationStatus: getAuthorizationStatus(state)
+  authorizationStatus: getAuthorizationStatus(state),
+  authorizationError: getAuthorizationError(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

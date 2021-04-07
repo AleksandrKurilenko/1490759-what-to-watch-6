@@ -811,6 +811,7 @@ main {
   font-weight: bold; }
 
 .movie-card__details-value {
+  white-space: pre-line;
   color: #131313; }
 
 .movie-card__reviews {
@@ -1336,11 +1337,14 @@ main {
   color: inherit; }
 
 .user-block {
+  display: flex;
+  align-items: center;
   margin-left: auto; }
 
 .user-block__avatar {
   width: 63px;
   height: 63px;
+  margin-left: 10px;
   overflow: hidden;
   border-radius: 50%; }
   .user-block__avatar img {

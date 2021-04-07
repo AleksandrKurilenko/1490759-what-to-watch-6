@@ -1,12 +1,12 @@
 import React from 'react';
-import Main from '../../pages/main/main.jsx';
+import Main from '../main/main.jsx';
 import PropTypes from 'prop-types';
 import {Switch, Route} from 'react-router-dom';
-import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
-import MyList from '../../pages/my-list/my-list';
-import Movie from '../../pages/movie/movie';
-import AddReview from '../../pages/add-review/add-review';
-import Player from '../../pages/player/player';
+import SignInScreen from '../sign-in-screen/sign-in-screen';
+import MyList from '../my-list/my-list';
+import Movie from '../movie/movie';
+import AddReview from '../add-review/add-review';
+import Player from '../player/player';
 import NotFoundPage from '../not-found-page/not-found-page';
 import {Url} from '../../consts';
 import {MOVIES_PROP, MOVIES_NOT_REQUIRE_PROP} from '../../utils/validate';

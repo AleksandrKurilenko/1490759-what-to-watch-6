@@ -4,7 +4,8 @@ import {AuthorizationErrorMessage, AuthorizationStatus} from '../../consts';
 
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationError: false,
+  authorizationStatus: AuthorizationStatus.INITIAL,
   isAuthorisationFailed: false,
   errorMessage: AuthorizationErrorMessage.DEFAULT,
   userAvatar: ``,
@@ -20,6 +21,9 @@ const auth = createReducer(initialState, (builder) => {
   builder.addCase(ActionType.AUTHORIZATION_FAILED, (state, action) => {
     state.isAuthorisationFailed = true;
     state.errorMessage = action.payload;
+  });
+  builder.addCase(`ERR`, (state, action) => {
+    state.authorizationError = action.payload;
   });
 });
 

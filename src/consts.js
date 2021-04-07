@@ -16,7 +16,8 @@ export const FILMS_AMOUNT_PER_STEP = 8;
 
 export const AuthorizationStatus = {
   AUTH: `Auth`,
-  NO_AUTH: `NoAuth`
+  NO_AUTH: `NoAuth`,
+  INITIAL: `Initial`
 };
 
 export const AuthorizationErrorMessage = {
@@ -32,3 +33,5 @@ export const ApiRoute = {
   PROMO: `/films/promo`,
   COMMENTS: `/comments`
 };
+
+export const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -10,7 +10,8 @@ const api = createAPI(() => {});
 describe(`Reducers work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     const initialState = {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authorizationError: false,
+      authorizationStatus: AuthorizationStatus.INITIAL,
       isAuthorisationFailed: false,
       errorMessage: AuthorizationErrorMessage.DEFAULT,
       userAvatar: ``
@@ -21,7 +22,7 @@ describe(`Reducers work correctly`, () => {
 
   it(`Reducer will return a valid state upon successful authorization`, () => {
     const state = {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authorizationStatus: AuthorizationStatus.INITIAL,
       isAuthorisationFailed: false,
       errorMessage: AuthorizationErrorMessage.DEFAULT,
       userAvatar: ``
@@ -39,14 +40,16 @@ describe(`Reducers work correctly`, () => {
 
   it(`Reducer will return a valid state in case of failed authorization`, () => {
     const state = {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authorizationError: false,
+      authorizationStatus: AuthorizationStatus.INITIAL,
       isAuthorisationFailed: false,
       errorMessage: AuthorizationErrorMessage.DEFAULT,
       userAvatar: ``
     };
 
     const validState = {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authorizationError: false,
+      authorizationStatus: AuthorizationStatus.INITIAL,
       isAuthorisationFailed: true,
       errorMessage: AuthorizationErrorMessage.EMAIL,
       userAvatar: ``
@@ -85,9 +88,9 @@ describe(`Async operation work correctly`, () => {
 
     return loginLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, authorization(AuthorizationStatus.AUTH, `fakeAvatar`));
-        expect(dispatch).toHaveBeenNthCalledWith(2, redirectToRoute(Url.MAIN));
+        expect(dispatch).toHaveBeenNthCalledWith(3, redirectToRoute(Url.MAIN));
       });
   });
 
